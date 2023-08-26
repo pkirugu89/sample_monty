@@ -1,5 +1,12 @@
 #include "monty.h"
 #include <stdlib.h>
+
+instruction_t instruction_s[] = {
+	{"push", push},
+	{"pop", pop},
+	{"pall", pall},
+	{NULL, NULL}
+};
 /**
  * push - Pushes an element onto the stack.
  * @stack: Pointer to the pointer to the stack.
@@ -97,11 +104,11 @@ instruction_t *find_instruction(char *opcode)
 {
 	int i;
 
-	for (i = 0; instruction_t[i].opcode; i++)
+	for (i = 0; instruction_s[i].opcode; i++)
 	{
-		if (strcmp(opcode, instruction_t[i].opcode) == 0)
+		if (strcmp(opcode, instruction_s[i].opcode) == 0)
 		{
-			return (&instruction_t[i]);
+			return (&instruction_s[i]);
 		}
 	}
 	/* opcode not found */
