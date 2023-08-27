@@ -2,9 +2,9 @@
 #include <stdlib.h>
 
 instruction_t instruction_s[] = {
-	{"push", push},
-	{"pop", pop},
-	{"pall", pall},
+	{"push", push_opcode},
+	{"pop", pop_opcode},
+	{"pall", pall_opcode},
 	{NULL, NULL}
 };
 /**
@@ -12,9 +12,9 @@ instruction_t instruction_s[] = {
  * @stack: Pointer to the pointer to the stack.
  * @line_num: The line number of the push operation.
  */
-void push(stack_t **stack, unsigned int line_num)
+void push_opcode(stack_t **stack, unsigned int line_num)
 {
-	char *arg = strtok(NULL, "\n\t");
+	char *arg = strtok(NULL, " \n");
 	int value;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
@@ -32,6 +32,7 @@ void push(stack_t **stack, unsigned int line_num)
 	}
 	/* convert argument to an integer */
 	value = atoi(arg);
+	printf("%s",arg);
 
 	if (!new_node)
 	{
@@ -51,7 +52,7 @@ void push(stack_t **stack, unsigned int line_num)
  * @stack: Pointer to the pointer to the stack.
  * @line_num: The line number of the pall operation.
  */
-void pall(stack_t **stack, unsigned int line_num)
+void pall_opcode(stack_t **stack, unsigned int line_num)
 {
 	/* Check if the stack is valid */
 	if (!stack)
@@ -76,7 +77,7 @@ void pall(stack_t **stack, unsigned int line_num)
  * @stack: Pointer to the stack pointer.
  * @line_num: The line number to the pop operation.
  */
-void pop(stack_t **stack, unsigned int line_num)
+void pop_opcode(stack_t **stack, unsigned int line_num)
 {
 	stack_t *temp = *stack;
 
@@ -106,6 +107,7 @@ instruction_t *find_instruction(char *opcode)
 
 	for (i = 0; instruction_s[i].opcode; i++)
 	{
+		printf("Comparing: %s to %s\n", opcode, instruction_s[i].opcode);
 		if (strcmp(opcode, instruction_s[i].opcode) == 0)
 		{
 			return (&instruction_s[i]);

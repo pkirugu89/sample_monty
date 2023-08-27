@@ -35,11 +35,11 @@ typedef struct instruction_s
 
 /* Function prototypes for opcode functions */
 /* prototype for adding an element on a stack */
-void push(stack_t **stack, unsigned int line_number);
+void push_opcode(stack_t **stack, unsigned int line_number);
 /* prototype for removing an element from the stack */
-void pop(stack_t **stack, unsigned int line_number);
+void pop_opcode(stack_t **stack, unsigned int line_number);
 /* prototype for printing all elements in a stack */
-void pall(stack_t **stack, unsigned int line_number);
+void pall_opcode(stack_t **stack, unsigned int line_number);
 /* prototype for finding the appropriate opcode function */
 instruction_t *find_instruction(char *opcode);
 /* prototype that checks if a str is numeric */
