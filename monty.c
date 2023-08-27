@@ -28,14 +28,19 @@ int main(int argc, char *argv[])
 	if (!file)
 	{
 		fprintf(stderr, "Error: can't open file %s\n", filename);
+		perror("fopen");
 		exit(EXIT_FAILURE);
 	}
 	while (getline(&line, &len, file) != -1)
 	{
 		line_number++;
+		printf("Line %u: %s", line_number, line);  /* Debug: print the line */
+		if (strcmp(line, "\n") == 0)
+			continue;
 		/* Parse the line and extract the opcode and argument */
-		opcode = strtok(line, "\n\t");
-		arg = strtok(NULL, "\n\t");
+		opcode = strtok(line, " \n\t");
+		arg = strtok(NULL, " \n\t");
+		printf("Tokenized arg in push_opcode: '%s'\n", arg);
 		if (!opcode)
 			continue;  /* Empty line or whitespace, skip it */
 		/* Find and call the corresponding opcode function based on opcode */

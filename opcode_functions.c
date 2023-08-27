@@ -14,10 +14,15 @@ instruction_t instruction_s[] = {
  */
 void push_opcode(stack_t **stack, unsigned int line_num)
 {
-	char *arg = strtok(NULL, " \n");
+	char *arg = strtok(NULL, " \n\t");
 	int value;
 	stack_t *new_node = malloc(sizeof(stack_t));
 
+	/* Debug: print the tokenized argument */
+	if (arg)
+		printf("Tokenized argument: '%s'\n", arg);
+	else
+		printf("Tokenized argument is NULL\n");
 	/* check if the stack and arguments are valid */
 	if (!stack)
 	{
@@ -32,7 +37,6 @@ void push_opcode(stack_t **stack, unsigned int line_num)
 	}
 	/* convert argument to an integer */
 	value = atoi(arg);
-	printf("%s",arg);
 
 	if (!new_node)
 	{
